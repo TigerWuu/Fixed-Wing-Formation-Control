@@ -48,6 +48,7 @@ title('Attitude[Body]', 'fontsize',titlefont);
 legend("$\phi$","$\theta$","$\psi$","$\chi$",'interpreter','latex','fontsize',legendfont,'location','best')
 grid on; grid minor;
 
+
 figure();
 x8_vis = uav_visualization('X8');
 uav_scale = 5;
@@ -74,7 +75,7 @@ c.Label.FontSize = titlefont;
 xlabel('x[m]','interpreter','latex','fontsize',tickfont);
 ylabel('y[m]','interpreter','latex','fontsize',tickfont);
 zlabel('z[m]','interpreter','latex','fontsize',tickfont);
-title('3D Trajectory (wind)','fontsize',titlefont);
+title('3D Trajectory (no wind)','fontsize',titlefont);
 legend("Trajectory","","","$V_w$","$V_a$",'interpreter','latex','fontsize',legendfont,'location','best')
 axis equal;
 zlim([80, 110]);

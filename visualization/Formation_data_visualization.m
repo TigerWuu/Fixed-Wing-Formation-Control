@@ -25,6 +25,15 @@ x_L = position(:,1);
 y_L = position(:,2);
 z_L = position(:,3);
 
+courseLFc = get(out.logsout, 'courseLF').Values.Data;
+course_L = courseLFc(:,1);
+course_Fc = courseLFc(:,2);
+
+G_error = get(out.logsout, 'G_error').Values.Data;
+lateral_err = squeeze(G_error(1,1,:));
+forward_err = squeeze(G_error(2,1,:));
+
+
 position_L_enu = position_L*transpose(T.R_NED_ENU);
 x_L_enu = position_L_enu(:,1);
 y_L_enu = position_L_enu(:,2);
@@ -53,6 +62,24 @@ xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
 ylabel('Angle[deg]','interpreter','latex','fontsize',tickfont);
 title('Attitude[Body]', 'fontsize',titlefont);
 legend("$\phi$","$\theta$","$\psi$","$\chi$",'interpreter','latex','fontsize',legendfont,'location','best')
+grid on; grid minor;
+
+figure();
+course_L_deg = course_L*180/pi;
+course_Fc_deg = course_Fc*180/pi;
+plot(t, course_L_deg, t, course_Fc_deg,'-','linewidth',1.5); hold on;
+xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
+ylabel('Angle[deg]','interpreter','latex','fontsize',tickfont);
+title('Course comparison', 'fontsize',titlefont);
+legend("$\chi_L$","$\chi_{Fc}$",'interpreter','latex','fontsize',legendfont,'location','best')
+grid on; grid minor;
+
+figure();
+plot(t, lateral_err, t, forward_err,'-','linewidth',1.5); hold on;
+xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
+ylabel('Distance[m]','interpreter','latex','fontsize',tickfont);
+title('Geometry error', 'fontsize',titlefont);
+legend("lateral error","forward error",'interpreter','latex','fontsize',legendfont,'location','best')
 grid on; grid minor;
 
 figure();

@@ -73,12 +73,12 @@ G_La = [X8.m,0     ,0     ,0, 0, 0;
         0   ,0     ,0     ,0, 1, 0;
         0   ,0     ,0     ,0, 0, 1];
 % longitudinal
-X8.model.lo.A = inv(G_Lo)*[te*(-2*CD/init.Va0) , te*((CL-CD_alpha)/init.Va0) , 0                  , 0, 0, -X8.m*env.g*cos(init.theta0);
-                           te*(-2*CL/init.Va0) , te*((-CD-CL_alpha)/init.Va0), te*(-CL_q)+X8.m*init.Va0, 0, 0, -X8.m*env.g*sin(init.theta0);
-                           te*(2*X8.c*Cm/init.Va0), te*((X8.c*Cm_alpha)/init.Va0), te*(X8.c*Cm_q)  , 0, 0,                   0;
-                           cos(init.theta0)    , sin(init.theta0)            , 0                  , 0, 0,                   0;
-                           -sin(init.theta0)   , cos(init.theta0)            , 0                  , 0, 0,                   0;
-                           0              , 0                      , 1                  , 0, 0,                   0];
+X8.model.lo.A = inv(G_Lo)*[te*(-2*CD/init.Va0)    , te*((CL-CD_alpha)/init.Va0)  , 0                       , 0, 0, -X8.m*env.g*cos(init.theta0);
+                           te*(-2*CL/init.Va0)    , te*((-CD-CL_alpha)/init.Va0) , te*(-CL_q)+X8.m*init.Va0, 0, 0, -X8.m*env.g*sin(init.theta0);
+                           te*(2*X8.c*Cm/init.Va0), te*((X8.c*Cm_alpha)/init.Va0), te*(X8.c*Cm_q)          , 0, 0,                            0;
+                           cos(init.theta0)       , sin(init.theta0)             , 0                       , 0, 0,                            0;
+                           -sin(init.theta0)      , cos(init.theta0)             , 0                       , 0, 0,                            0;
+                           0                      , 0                            , 1                       , 0, 0,                            0];
 X8.model.lo.B = inv(G_Lo)*[te*(-CD_delta_e), 1;
                            te*(-CL_delta_e), 0;
                            te*(X8.c*Cm_delta_e),0;
