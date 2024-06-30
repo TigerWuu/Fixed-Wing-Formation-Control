@@ -23,6 +23,10 @@ delta_t = control_inputs(:,1);
 delta_e = control_inputs(:,2);
 delta_a = control_inputs(:,3);
 
+velocity = get(out.logsout, 'velocity').Values.Data;
+Va = velocity(:,1);
+Vg = velocity(:,2);
+
 winds = get(out.logsout, 'ws').Values.Data;
 ws_n = winds(:,1);
 ws_e = winds(:,2);
@@ -34,6 +38,21 @@ titlefont = 20;
 tickfont = 18;
 legendfont = 16;
 
+figure();
+plot(t, Va,'-','linewidth',1.5); hold on;
+xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
+ylabel('Velocity[m/s]','interpreter','latex','fontsize',tickfont);
+title('Airspeed', 'fontsize',titlefont);
+legend("$V_a$",'interpreter','latex','fontsize',legendfont,'location','best')
+grid on; grid minor;
+
+figure();
+plot(t, delta_t,'-','linewidth',1.5); hold on;
+xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
+ylabel('Force[N]','interpreter','latex','fontsize',tickfont);
+title('Thrust', 'fontsize',titlefont);
+legend("$\delta_t$",'interpreter','latex','fontsize',legendfont,'location','best')
+grid on; grid minor;
 
 figure();
 phi_deg = phi*180/pi;

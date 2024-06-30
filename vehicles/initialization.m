@@ -20,5 +20,8 @@ env.g = 9.81; % [m/s^2]
 % air density
 env.rho = 1.2682; % [kg/m^3]
 % wind (ned)
-env.w.s = 15; % [m/s]
-env.w.dir = pi/4; % [rad]
+env.w.s = 5; % [m/s]
+env.w.dir = pi/6; % [rad]
+
+%% Discrete
+ts = 1;

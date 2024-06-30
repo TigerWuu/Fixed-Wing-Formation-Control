@@ -1,5 +1,6 @@
 % uav_visualization 
 close all;
+%% get data
 t = out.tout;
 
 T = transformation(eye(3), [0;0;0]);
@@ -9,6 +10,10 @@ phi= attitude(:,1);
 theta = attitude(:,2);
 psi = attitude(:,3);
 course = attitude(:,4);
+
+% course_L = get(out.logsout, 'course_L').Values.Data;
+% course_L= attitude(:,1);
+
 
 position_enu = get(out.logsout, 'position_ENU').Values.Data;
 x_enu = position_enu(:,1);
@@ -21,17 +26,21 @@ y = position(:,2);
 z = position(:,3);
 
 position_L = get(out.logsout, 'position_L').Values.Data;
-x_L = position(:,1);
-y_L = position(:,2);
-z_L = position(:,3);
+x_L = position_L(:,1);
+y_L = position_L(:,2);
+z_L = position_L(:,3);
 
 courseLFc = get(out.logsout, 'courseLF').Values.Data;
 course_L = courseLFc(:,1);
 course_Fc = courseLFc(:,2);
 
+VFc = get(out.logsout, 'VFc').Values.Data;
+V_Fc = VFc(:,1);
+
 G_error = get(out.logsout, 'G_error').Values.Data;
 lateral_err = squeeze(G_error(1,1,:));
 forward_err = squeeze(G_error(2,1,:));
+vertical_err = squeeze(G_error(3,1,:));
 
 
 position_L_enu = position_L*transpose(T.R_NED_ENU);
@@ -39,17 +48,38 @@ x_L_enu = position_L_enu(:,1);
 y_L_enu = position_L_enu(:,2);
 z_L_enu = position_L_enu(:,3);
 
-winds = get(out.logsout, 'ws').Values.Data;
-ws_n = winds(:,1);
-ws_e = winds(:,2);
-ws_d = winds(:,3);
+winds = get(out.logsout, 'wind').Values.Data;
+winds_enu = winds*transpose(T.R_NED_ENU);
+w_e = winds_enu(:,1);
+w_n = winds_enu(:,2);
+w_u = winds_enu(:,3);
 
 Va = get(out.logsout, 'Va').Values.Data;
 %% plot style
 titlefont = 20;
 tickfont = 18;
 legendfont = 16;
+%%
+figure();
+plot(t, -w_e,'-','linewidth',1.5); hold on;
+xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
+ylabel('Velocity[m/s]','interpreter','latex','fontsize',tickfont);
+title('Wind','interpreter','latex','fontsize',titlefont);
 
+legend("$wind$",'interpreter','latex','fontsize',legendfont,'location','best')
+grid on; grid minor;
+
+xlim([10, 70]);
+ylim([8, 12]);
+
+figure();
+plot(t, V_Fc,'-','linewidth',1.5); hold on;
+xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
+ylabel('Velocity[m/s]','interpreter','latex','fontsize',tickfont);
+title('Airspeed command[$V_F^c$]','interpreter','latex','fontsize',titlefont);
+
+legend("$V_F^c$",'interpreter','latex','fontsize',legendfont,'location','best')
+grid on; grid minor;
 
 figure();
 phi_deg = phi*180/pi;
@@ -75,24 +105,30 @@ legend("$\chi_L$","$\chi_{Fc}$",'interpreter','latex','fontsize',legendfont,'loc
 grid on; grid minor;
 
 figure();
-plot(t, lateral_err, t, forward_err,'-','linewidth',1.5); hold on;
+plot(t, lateral_err, t, forward_err, t, vertical_err, '-','linewidth',1.5); hold on;
 xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
 ylabel('Distance[m]','interpreter','latex','fontsize',tickfont);
 title('Geometry error', 'fontsize',titlefont);
-legend("lateral error","forward error",'interpreter','latex','fontsize',legendfont,'location','best')
+legend("lateral error","forward error","vertical error",'interpreter','latex','fontsize',legendfont,'location','best')
 grid on; grid minor;
 
 figure();
 x8_vis = uav_visualization('X8');
+x8_leader = uav_visualization('X8-leader');
+
 uav_scale = 5;
 
 colors = colormap(jet(length(t))); 
 
+plot3(x_L_enu, y_L_enu, z_L_enu,'-.','linewidth',1, 'color', 'b'); hold on;
 for i = 1:100:length(t)
-  plot3(x_enu(i), y_enu(i), z_enu(i),'.','MarkerSize',5,"color",colors(i,:)); hold on;
+  plot3(x_enu(i), y_enu(i), z_enu(i),'.','MarkerSize',5,"color",colors(i,:));
   if mod((i-1),1000) == 0
+    % x8_leader.draw(phi(i), theta(i), psi(i), x_L(i), y_L(i), z_L(i), uav_scale);
+    plot3(x_L_enu(i), y_L_enu(i), z_L_enu(i),'.','MarkerSize',15,"color","g");
     x8_vis.draw(phi(i), theta(i), psi(i), x(i), y(i), z(i), uav_scale);
-    q = quiver3(x_enu(i), y_enu(i), z_enu(i), ws_n(i), ws_e(i), ws_d(i), 0,'b','linewidth',1);
+
+    q = quiver3(x_enu(i), y_enu(i), z_enu(i), w_e(i), w_n(i), w_u(i), 0,'b','linewidth',1);
     q.MaxHeadSize = 1;
     
     Vav = T.R_NED_ENU*T.rotation(phi(i), theta(i), psi(i))*[Va(i);0;0];
@@ -104,29 +140,20 @@ c=colorbar('FontSize',tickfont,'Ticks',linspace(0,1,11),'TickLabels',linspace(0,
 c.Label.String = 'Time[s]';
 c.Label.FontSize = titlefont;
 
-% plot3(x, y, z,'-','linewidth',1.5);
+% for i = 1:100:length(t)
+%   plot3(x_L_enu(i), y_L_enu(i), z_L_enu(i), '.','MarkerSize',5,"color",colors(i,:)); hold on;
+% end
+% c=colorbar('Ticks',linspace(0,1,11),'TickLabels',linspace(0,t(end),11));
+% c.Label.String = 'Time[s]';
+
 xlabel('x[m]','interpreter','latex','fontsize',tickfont);
 ylabel('y[m]','interpreter','latex','fontsize',tickfont);
 zlabel('z[m]','interpreter','latex','fontsize',tickfont);
-title('3D Trajectory (wind)','fontsize',titlefont);
-legend("Trajectory","","","$V_w$","$V_a$",'interpreter','latex','fontsize',legendfont,'location','best')
+title('3D Trajectory','fontsize',titlefont);
+% legend("Trajectory","","","$V_w$","$V_a$","reference",'interpreter','latex','fontsize',legendfont,'location','best')
+legend("","","Virtual leader",'interpreter','latex','fontsize',legendfont,'location','best')
 axis equal;
-zlim([80, 110]);
+% zlim([80, 110]);
 % view([0,-1,0]);
 grid on; grid minor;
 
-% figure();
-colors = colormap(jet(length(t))); 
-for i = 1:100:length(t)
-  plot3(x_L_enu(i), y_L_enu(i), z_L_enu(i), '.','MarkerSize',5,"color",colors(i,:)); hold on;
-end
-c=colorbar('Ticks',linspace(0,1,11),'TickLabels',linspace(0,t(end),11));
-c.Label.String = 'Time[s]';
-
-% plot(x, y,'-','linewidth',1.5);
-xlabel('x[m]','interpreter','latex','fontsize',12);
-ylabel('y[m]','interpreter','latex','fontsize',12);
-zlabel('z[m]','interpreter','latex','fontsize',12);
-title('Position[ENU]');
-legend("3D position(XYZ)",'interpreter','latex','fontsize',12,'location','best')
-grid on; grid minor;

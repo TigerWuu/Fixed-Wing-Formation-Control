@@ -108,6 +108,40 @@ classdef uav_visualization < handle
                             red;
                             blue;
                             blue];
+                case 'X8-leader'
+                    V = [0    ,0   ,0;
+                         -0.5 ,1   ,0;
+                         -0.7 ,1   ,0;
+                         -0.6 ,0.2 ,0;
+                         -0.65,0.1 ,0;
+                         -0.65,-0.1,0;
+                         -0.6 ,-0.2,0;
+                         -0.7 ,-1  ,0;
+                         -0.5 ,-1  ,0;
+                         -0.5 ,0   ,-0.15;
+                         -0.55,1   ,-0.1;
+                         -0.7 ,1   ,-0.1;
+                         -0.55,-1  ,-0.1;
+                         -0.7 ,-1  ,-0.1;];
+                    F.s3 = [1,4,10;
+                            1,7,10;
+                            4,5,10;
+                            5,6,10;
+                            6,7,10;];
+                    F.s4 = [1,2,3,4;
+                            1,7,8,9;
+                            2,3,12,11;
+                            8,9,13,14;
+                            ];
+                    C.s3 = [blue;
+                            blue;
+                            black;
+                            black;
+                            black];
+                    C.s4 = [green;
+                            green;
+                            blue;
+                            blue];
                 otherwise
                     warning('Undefined airframe. No airframe created.')
             end
