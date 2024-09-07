@@ -23,5 +23,13 @@ env.rho = 1.2682; % [kg/m^3]
 env.w.s = 5; % [m/s]
 env.w.dir = pi/6; % [rad]
 
+%% Inner loop times constant
+alpha = 0.5;
+beta = 0.5;
+
+%% Desired formation
+lc = [0,2.2,-2.2];
+fc = [0,2.2,2.2];
+hc = [0,0,0];
 %% Discrete
 ts = 1;
