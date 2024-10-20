@@ -23,6 +23,10 @@ xlabel('Time (s)');
 ylabel('Data');
 title('ROS2 Bag Data');
 grid on;
+%% import data
+filename = './rosbag/0907.csv';
+data = readmatrix(filename)';
+
 
 %%
 

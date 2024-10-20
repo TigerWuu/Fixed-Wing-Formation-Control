@@ -43,7 +43,7 @@ forward_err = squeeze(G_error(2,1,:));
 vertical_err = squeeze(G_error(3,1,:));
 
 
-position_L_enu = position_L*T.R_NED_ENU;
+position_L_enu = position_L*transpose(T.R_NED_ENU);
 x_L_enu = position_L_enu(:,1);
 y_L_enu = position_L_enu(:,2);
 z_L_enu = position_L_enu(:,3);
@@ -75,8 +75,61 @@ RMSE = sqrt(RMSE/num);
 display(["IAE = ", num2str(IAE)]);
 display(["RMSE = ", num2str(RMSE)]);
 
+% lyapunov candidate
+V = zeros(length(t),1);
+de = zeros(length(t),1);
+for i = 1:length(t)
+    V(i) = 1/2*(lateral_err(i)^2+forward_err(i)^2+vertical_err(i)^2);
+    de(i) = (lateral_err(i)^2+forward_err(i)^2+vertical_err(i)^2)^0.5;
+end
 
+% reaching time and V upper bounding
+V0 = 1/2*(lateral_err(1)^2+forward_err(1)^2+vertical_err(1)^2);
+alpha_r = 0.5;
+c = min([c1,c2,c3]);
+lambda = 2*c;
+q = alpha_r^(alpha_r/(1-alpha_r))-alpha_r^(1/(1-alpha_r));
+eta = 2*c*q;
 
+e = 0:0.01:1;
+V_r = zeros(length(e),1);
+d_r = zeros(length(e),1);
+t_r = zeros(length(e),1);
+for i=1:length(e)
+    V_r(i) = (eta/((1-e(i))*lambda))^(1/alpha_r); % cal upper bounding of V instead of V^alpha 
+    d_r(i) = sqrt((eta/((1-e(i))*lambda))^(1/alpha_r)*2);
+    t_r(i) = 1/(e(i)*lambda*(1-alpha_r))*(V0^(1-alpha_r)-((eta/((1-e(i))*lambda)))^((1-alpha_r)/alpha_r));
+end
+
+% plot
+figure();
+yyaxis left
+plot(e,t_r,'-','linewidth',1.5);
+ylabel('Reach time[s]','interpreter','latex','fontsize',tickfont);
+
+yyaxis right
+plot(e,V_r,'-','linewidth',1.5); hold on;
+ylabel('Upper bounding of $V$','interpreter','latex','fontsize',tickfont);
+
+xlabel('$\epsilon$','interpreter','latex','fontsize',tickfont);
+title('$T_r$ vs. upper bounding of V','interpreter','latex','fontsize',titlefont);
+legend("$T_r$","upper bounding of $V$",'interpreter','latex','fontsize',legendfont,'location','best')
+
+figure();
+plot(t_r,V_r,'-','linewidth',1.5);hold on;
+plot(t, V,'-','linewidth',1.5);
+xlabel('Time[s]','interpreter','latex','fontsize',tickfont);
+ylabel('Lyapunov candidate $V$','interpreter','latex','fontsize',tickfont);
+title('Lyapunov candidate bounding time','interpreter','latex','fontsize',titlefont);
+legend("upper bounding of $V$","$V$",'interpreter','latex','fontsize',legendfont,'location','best')
+
+figure();
+plot(t_r, d_r,'-','linewidth',1.5);hold on;
+plot(t, de,'-','linewidth',1.5);
+xlabel('Time[s]','interpreter','latex','fontsize',tickfont);
+ylabel('Distance error[m]','interpreter','latex','fontsize',tickfont);
+title('Distance error bounding time','interpreter','latex','fontsize',titlefont);
+legend("Upper bounding of $d_e$", "$d_e$",'interpreter','latex','fontsize',legendfont,'location','best')
 %%
 
 figure();
@@ -128,13 +181,13 @@ uav_scale = 5;
 colors = colormap(jet(length(t))); 
 
 % UAV location setup 
-time_interval = 0.5; % 0.5s
+time_interval = 0.1; % 0.5s
 Stoptime = t(end); % simulation stoptime
 target_time_points = 1:time_interval:Stoptime;
 UAV_locations_points = [1];
 UAV_locations = [1];
 target_index = 1;
-ratio = 10; % 5s
+ratio = 50; % 5s
 
 for i = 1:length(t)
     if t(i) > target_time_points(target_index)
@@ -148,7 +201,8 @@ end
 UAV_locations_points = [UAV_locations_points length(t)]; % add last time point
 UAV_locations = [UAV_locations length(t)];
 %%
-plot3(x_L_enu, y_L_enu, z_L_enu,'-.','linewidth',1, 'color', 'b'); hold on;
+plot3(x_L_enu, y_L_enu, z_L_enu,'-.','linewidth',1, 'color', 'b');
+hold on;
 for i = UAV_locations
     % x8_leader.draw(phi(i), theta(i), psi(i), x_L(i), y_L(i), z_L(i), uav_scale);
     plot3(x_L_enu(i), y_L_enu(i), z_L_enu(i),'.','MarkerSize',15,"color","g");
