@@ -1,5 +1,6 @@
 clc;
 clear;
+close all;
  
 
 run("vehicles/X8_sky.m")

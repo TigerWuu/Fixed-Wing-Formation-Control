@@ -7,8 +7,8 @@ init.phi0 = 0; % [rad]
 init.course0 = 0; % [rad]
 
 % NED frame
-init.x0 = 1.0; % [m]
-init.y0 = 1.0; % [m]
+init.x0 = 0.0; % [m]
+init.y0 = 0.0; % [m]
 init.z0 = -90; % [m]
 % ENU frame
 init.h0 = -init.z0; % [m]
@@ -38,16 +38,16 @@ tau.psi = 0.4;
 tau.theta = 0.1;
 %% observer/formation gain
 L = 1;
+L2 = 0.1;
+
 c1 = 1.0;
-c2 = 0.2;
+c2 = 1.0;
 c3 = 1.0;
-c4 = 0.2;
-c5 = 0.2;
-c6 = 5;
+c4 = 3.0;
+c5 = 3.0;
+c6 = 3.0;
 C = [c1, c2, c3, c4 ,c5, c6];% le, fe, he, va_e, psi_e, theta_e
-% c1 = 0.1;
-% c2 = 0.1;
-% c3 = 0.1;
+
 %% Desired formation
 lc = [0,2.2,-2.2];
 fc = [0,2.2,2.2];
