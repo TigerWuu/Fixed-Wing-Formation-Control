@@ -48,7 +48,7 @@ figure();
 x8_vis = uav_visualization('X8');
 x8_leader = uav_visualization('X8-leader');
 
-uav_scale = 5;
+uav_scale = 1;
 colors = colormap(jet(length(t))); 
 
 % UAV location setup 
@@ -75,8 +75,8 @@ UAV_locations = [UAV_locations length(t)];
 plot3(x_L_enu, y_L_enu, z_L_enu,'-.','linewidth',1, 'color', 'b');
 hold on;
 for i = UAV_locations
-    % x8_leader.draw(phi(i), theta(i), psi(i), x_L(i), y_L(i), z_L(i), uav_scale);
-    plot3(x_L_enu(i), y_L_enu(i), z_L_enu(i),'.','MarkerSize',15,"color","g");
+    x8_leader.draw(phi(i), theta(i), psi(i), x_L(i), y_L(i), z_L(i), uav_scale);
+    % plot3(x_L_enu(i), y_L_enu(i), z_L_enu(i),'.','MarkerSize',15,"color","g");
     x8_vis.draw(phi(i), theta(i), psi(i), x(i), y(i), z(i), uav_scale);
     
     q = quiver3(x_enu(i), y_enu(i), z_enu(i), w_e(i), w_n(i), w_u(i), 0,'b','linewidth',1);
@@ -109,5 +109,6 @@ axis equal;
 % zlim([80, 110]);
 % view([0,-1,0]);
 % view(2);
-grid on; grid minor;
+grid on; 
+% grid minor;
 

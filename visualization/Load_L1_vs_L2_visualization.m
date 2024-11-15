@@ -34,6 +34,8 @@ wa_f = wind_ga(:,2);
 wa_h = wind_ga(:,3);
 
 w_l2 = w_l;
+w_f2 = w_f;
+w_h2 = w_h;
 for i = 1:length(L1)
     for j = 1:length(L2)
         wg_hat = eval(['get(L1_',char(L1(i)),'_L2_',char(L2(j)),'.out.logsout,"w_g_hat").Values.Data']);
@@ -56,7 +58,13 @@ for i = 1:length(L1)
         w_l2 = cat(2,w_l2,w_l2_hat);
         wa_l = cat(2,wa_l,wa_l_hat);
         % wf
+        w_f = cat(2,w_f,w_f_hat);
+        w_f2 = cat(2,w_f2,w_f2_hat);
+        wa_f = cat(2,wa_f,wa_f_hat);
         % wh
+        w_h = cat(2,w_h,w_h_hat);
+        w_h2 = cat(2,w_h2,w_h2_hat);
+        wa_h = cat(2,wa_h,wa_h_hat);
     end
 end
 
