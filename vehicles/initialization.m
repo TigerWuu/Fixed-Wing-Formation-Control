@@ -33,9 +33,15 @@ leader.radius = 400;
 
 %% Inner loop inverse time constant
 tau = struct();
+% Px4 from manual calculation
 % tau.va = 0.26;
 % tau.psi = 0.1;
 % tau.theta = 1.3;
+
+% Px4 from tfest
+% tau.va = 0.1918;
+% tau.psi = 0.0841;
+% tau.theta = 2.012;
 
 tau.va = 0.5;
 tau.psi = 0.5;

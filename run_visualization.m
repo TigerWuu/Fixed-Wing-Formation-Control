@@ -10,9 +10,9 @@ addpath('./visualization');
 
 
 %% ros-px4
-% addpath('./visualization/ros-px4');
+addpath('./visualization/ros-px4');
 % run("ROS_Formation_data_visualization.m")
-% run("PX4_fw_system_ID.m")
+run("PX4_fw_system_ID.m")
 
 %% load wind
 addpath('./visualization/load/wind');
@@ -29,6 +29,7 @@ run("Load_LBFC_windno_vs_visualization.m") % different wind cases : no wind
 %% Read data from csv
 addpath('./visualization/read');
 % run("Read_straight.m") % different wind cases
+
 
 
 
