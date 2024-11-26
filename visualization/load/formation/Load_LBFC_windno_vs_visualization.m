@@ -10,6 +10,9 @@ wind_com = ["yes","no"];
 for i = 1:length(wind_com)
     eval(['wind_no_windcom_',char(wind_com(i)),'=load("', char(path),'line_45_wind_no_com_',char(wind_com(i)),'_70s.mat")']);
 end
+%% save data setting
+save_type = "eps";
+save_path = "./result/formation/straight/";
 
 %% plot style
 titlefont = 20;
@@ -35,6 +38,7 @@ wa_l = wind_ga(:,1);
 wa_f = wind_ga(:,2);
 wa_h = wind_ga(:,3);
 for i = 1:length(wind_com)
+    case_name = wind_com(i);
     G_error = eval(['get(wind_no_windcom_',char(wind_com(i)),'.out.logsout,"G_error").Values.Data']);
     va_vs = eval(['get(wind_no_windcom_',char(wind_com(i)),'.out.logsout,"va_vs").Values.Data']);
     psi_vs = eval(['get(wind_no_windcom_',char(wind_com(i)),'.out.logsout,"psi_vs").Values.Data']);
@@ -72,7 +76,7 @@ for i = 1:length(wind_com)
         while psi_e(k) < -pi
             psi_e(k) = psi_e(k) + 2*pi;
         end
-        while psi_e(i) > pi
+        while psi_e(k) > pi
             psi_e(k) = psi_e(k) - 2*pi;
         end
     end 
@@ -115,9 +119,10 @@ for i = 1:length(wind_com)
     legend("GT","Estimation",'interpreter','latex','fontsize',legendfont,'location','southoutside', 'orientation', 'horizontal')
     xlim([0,stopt])
     grid on;
+    % save figure
+    saveas(gcf, save_path+"nowind_vel_"+case_name, save_type)
 
     % acceleration
-
     figure('Name','wind acceleration');
     tiledlayout(3,1)
     nexttile
@@ -147,6 +152,9 @@ for i = 1:length(wind_com)
     legend("GT","Estimation",'interpreter','latex','fontsize',legendfont,'location','southoutside', 'orientation', 'horizontal')
     xlim([0,stopt])
     grid on;
+    % save figure
+    saveas(gcf, save_path+"nowind_accel_"+case_name, save_type)
+
     %% control inputs
     figure("Name",wind_com(i));
     subplot(3,1,1);
@@ -176,9 +184,10 @@ for i = 1:length(wind_com)
     % title('$\theta_F^c$','interpreter','latex','fontsize',titlefont);
     legend("$\theta_F$","$\theta_F^c$","$\theta_F^d$",'interpreter','latex','fontsize',legendfont,'location','bestoutside')
     grid on; 
+    % save figure
+    saveas(gcf, save_path+"nowind_control_inputs_"+case_name, save_type)
 
     %% control inputs error
-
     figure("Name",wind_com(i));
     subplot(3,1,1);
     
@@ -208,7 +217,8 @@ for i = 1:length(wind_com)
     % title('$\theta_F^c$','interpreter','latex','fontsize',titlefont);
     % legend("$\theta_e^d$",'interpreter','latex','fontsize',legendfont,'location','bestoutside')
     grid on; 
-
+    % save figure
+    saveas(gcf, save_path+"nowind_control_inputs_error"+case_name, save_type)
 
     %% caculate distance IAE, RMSE. steady-state
     % IAE, RMSE
@@ -285,8 +295,9 @@ xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
 % title('$h_e$','interpreter','latex','fontsize',titlefont);
 % legend("Com: yes","Com: no",'interpreter','latex','fontsize',legendfont,'location','bestoutside')
 
-legend("Wind com on","Wind com off",'interpreter','latex','fontsize',legendfont,'location','southoutside', 'orientation', 'horizontal')
+legend("Compensation: v","Compensation: x",'interpreter','latex','fontsize',legendfont,'location','southoutside', 'orientation', 'horizontal')
 grid on;
-
+% save figure
+saveas(gcf, save_path+"nowind_formation_error", save_type)
 
 

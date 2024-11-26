@@ -11,6 +11,12 @@ wind_mag = ["2", "8"];
 wind_prop = ["c" , "s"];
 wind_com = ["yes","no"];
 
+% for case name
+wind_dir_case = ["D+135", "D-135"];
+wind_mag_case = ["M2", "M8"];
+wind_prop_case = ["Pc" , "Ps"];
+wind_com_case = ["Cv","Cx"];
+
 cases = cell(2,2,2,2);
 for i = 1:length(wind_com)
     for j = 1:length(wind_prop)
@@ -23,7 +29,7 @@ for i = 1:length(wind_com)
     end
 end
 %% save data setting
-save_type = "svg";
+save_type = "eps";
 save_path = "./result/formation/straight/";
 %% plot style
 titlefont = 20;
@@ -42,11 +48,11 @@ cases_num = 0;
 for l = 1:length(wind_dir)
     for j = 1:length(wind_prop)
         for k = 1:length(wind_mag)
-            lateral_error = zeros(length(t),1);
-            forward_error = zeros(length(t),1);
-            vertical_error = zeros(length(t),1);
+            lateral_error = [];
+            forward_error = [];
+            vertical_error = [];
             for i = 1:length(wind_com)
-                case_name = wind_dir(l)+"_"+wind_mag(k)+"_"+wind_prop(j)+"_"+wind_com(i);
+                case_name = wind_dir_case(l)+wind_mag_case(k)+wind_prop_case(j)+wind_com_case(i);
                 cases_num = cases_num + 1;
 
                 G_error = eval(['get(wind_',char(wind_dir_n(l)),'_',char(wind_mag(k)),'_',char(wind_prop(j)),'_',char(wind_com(i)),'.out.logsout,"G_error").Values.Data']);
@@ -116,7 +122,7 @@ for l = 1:length(wind_dir)
                 legend("$\theta_F$","$\theta_F^c$","$\theta_F^d$",'interpreter','latex','fontsize',legendfont,'location','bestoutside')
                 grid on; 
                 % save figure
-                saveas(gcf, save_path+"control_inputs_"+case_name, save_type)
+                % saveas(gcf, save_path+"control_inputs_"+case_name, save_type)
             
                 %% control inputs error
             
@@ -151,7 +157,7 @@ for l = 1:length(wind_dir)
                 grid on; 
             
                 % save figure
-                saveas(gcf, save_path+"control_inputs_error_"+case_name, save_type)
+                % saveas(gcf, save_path+"control_inputs_error_"+case_name, save_type)
                 %% caculate distance IAE, RMSE. steady-state
                 % IAE, RMSE
 
@@ -209,30 +215,30 @@ for l = 1:length(wind_dir)
             figure('Name','formation_error_'+wind_dir(l)+"_"+wind_mag(k)+"_"+wind_prop(j));
             tiledlayout(3,1)
             nexttile
-            for m = 2:length(lateral_error(1,:))
-                plot(t, lateral_error(:,m),line_s(m-1),'linewidth',1.5);hold on;
+            for m = 1:length(lateral_error(1,:))
+                plot(t, lateral_error(:,m),line_s(m),'linewidth',1.5);hold on;
             end
             ylabel('$l_e$[m]','interpreter','latex','fontsize',tickfont);
             title('Formation error','interpreter','latex','fontsize',titlefont);
             grid on;
             
             nexttile
-            for m = 2:length(forward_error(1,:))
-                plot(t, forward_error(:,m),line_s(m-1),'linewidth',1.5);hold on;
+            for m = 1:length(forward_error(1,:))
+                plot(t, forward_error(:,m),line_s(m),'linewidth',1.5);hold on;
             end
             ylabel('$f_e$[m]','interpreter','latex','fontsize',tickfont);
             grid on;
             
             nexttile
-            for m = 2:length(vertical_error(1,:))
-                plot(t, vertical_error(:,m),line_s(m-1),'linewidth',1.5);hold on;
+            for m = 1:length(vertical_error(1,:))
+                plot(t, vertical_error(:,m),line_s(m),'linewidth',1.5);hold on;
             end
             ylabel('$h_e$[m]','interpreter','latex','fontsize',tickfont);
             xlabel('Times[s]','interpreter','latex','fontsize',tickfont);            
             legend("Wind com on","Wind com off",'interpreter','latex','fontsize',legendfont,'location','southoutside', 'orientation', 'horizontal')
             grid on;
             % save figure
-            saveas(gcf, save_path+"formation_error_"+case_name, save_type)
+            % saveas(gcf, save_path+"formation_error_"+case_name, save_type)
         end
     end
 end
@@ -246,5 +252,6 @@ end
 performance_indices_name = {"Cases";"IAE";"RMSE";"RMSE_l";"RMSE_f";"RMSE_h"};
 performance_indices = [cases_title; num2cell(performance_cases)];
 performance_indices = [performance_indices_name performance_indices];
-% writecell(performance_indices,'wind_straight_1.csv');
+% save("./csv/straight_case_name.mat","cases_title")
+writecell(performance_indices,'./csv/wind_straight_name_mod.xlsx');
 

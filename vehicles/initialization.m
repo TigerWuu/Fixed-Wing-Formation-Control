@@ -7,9 +7,9 @@ init.phi0 = 0; % [rad]
 init.course0 = 0; % [rad]
 
 % NED frame
-init.x0 = -10.0; % [m]
-init.y0 = -10.0; % [m]
-init.z0 = -80; % [m]
+init.x0 = 0.0; % [m]
+init.y0 = 0.0; % [m]
+init.z0 = -90; % [m]
 % ENU frame
 init.h0 = -init.z0; % [m]
 
@@ -29,13 +29,13 @@ leader.va = 18;
 % straight line
 leader.dir = pi/4;
 % circle
-leader.radius = 200;
+leader.radius = 400;
 
 %% Inner loop inverse time constant
 tau = struct();
 % tau.va = 0.26;
-% tau.psi = 0.06;
-% tau.theta = 1.33;
+% tau.psi = 0.1;
+% tau.theta = 1.3;
 
 tau.va = 0.5;
 tau.psi = 0.5;
@@ -82,4 +82,7 @@ Va_min = -Inf;
 ts = 1;
 
 %% wind compensation
-com = 1;
+com = 0;
+
+%% Sim time
+SimTime = 70;
