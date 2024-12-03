@@ -38,6 +38,8 @@ w_n = winds_enu(:,2);
 w_u = winds_enu(:,3);
 
 Va = get(out.logsout, 'Va').Values.Data;
+
+course_L = get(out.logsout, 'course_L').Values.Data;
 %% plot style
 titlefont = 20;
 tickfont = 18;
@@ -48,7 +50,7 @@ figure();
 x8_vis = uav_visualization('X8');
 x8_leader = uav_visualization('X8-leader');
 
-uav_scale = 1;
+uav_scale = 10;
 colors = colormap(jet(length(t))); 
 
 % UAV location setup 
@@ -75,7 +77,7 @@ UAV_locations = [UAV_locations length(t)];
 plot3(x_L_enu, y_L_enu, z_L_enu,'-.','linewidth',1, 'color', 'b');
 hold on;
 for i = UAV_locations
-    x8_leader.draw(phi(i), theta(i), psi(i), x_L(i), y_L(i), z_L(i), uav_scale);
+    x8_leader.draw(phi(i), theta(i), course_L(i), x_L(i), y_L(i), z_L(i), uav_scale);
     % plot3(x_L_enu(i), y_L_enu(i), z_L_enu(i),'.','MarkerSize',15,"color","g");
     x8_vis.draw(phi(i), theta(i), psi(i), x(i), y(i), z(i), uav_scale);
     

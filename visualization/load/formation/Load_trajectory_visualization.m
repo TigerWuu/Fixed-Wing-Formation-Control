@@ -36,6 +36,8 @@ function [t] = Load_trajectory_visualization(cas, Stoptime)
     w_u = winds_enu(:,3);
     
     Va = get(cas.out.logsout, 'Va').Values.Data;
+
+    course_L = get(cas.out.logsout, 'course_L').Values.Data;
     %% plot style
     titlefont = 16;
     tickfont = 14;
@@ -73,7 +75,7 @@ function [t] = Load_trajectory_visualization(cas, Stoptime)
     plot3(x_L_enu, y_L_enu, z_L_enu,'-.','linewidth',1, 'color', 'b');
     hold on;
     for i = UAV_locations
-        x8_leader.draw(phi(i), theta(i), psi(i), x_L(i), y_L(i), z_L(i), uav_scale);
+        x8_leader.draw(phi(i), theta(i), course_L(i), x_L(i), y_L(i), z_L(i), uav_scale);
         % plot3(x_L_enu(i), y_L_enu(i), z_L_enu(i),'.','MarkerSize',15,"color","g");
         x8_vis.draw(phi(i), theta(i), psi(i), x(i), y(i), z(i), uav_scale);
         
