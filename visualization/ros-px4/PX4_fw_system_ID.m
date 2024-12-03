@@ -53,7 +53,26 @@ tickfontbar = 14;
 titlefontbar = 16;
 legendfontbar = 18;
 
-%%
+%% ID to first order system by tfest
+np = 1;
+ts = 0.02;
+data_va = iddata(double(Vaf), double(Vaf_c), ts);
+data_psi = iddata(double(psif), double(psif_c), ts);
+data_theta = iddata(double(thetaf), double(thetaf_c), ts);
+
+% sys_Va = tfest(double(Vaf_c), double(Vaf), np, 'Ts', ts);
+% sys_psi = tfest(double(psif_c), double(psif), np, 'Ts', ts);
+% sys_theta = tfest(double(thetaf_c), double(thetaf), np, 'Ts', ts);
+
+sys_Va = tfest(data_va, np);
+sys_psi = tfest(data_psi, np);
+sys_theta = tfest(data_theta, np);
+
+% sys_Va_c = d2c(sys_Va);
+% sys_psi_c = d2c(sys_psi);
+% sys_theta_c = d2c(sys_theta);
+
+%% plot 
 figure('Name','Control inputs');
 
 subplot(3,1,1);
