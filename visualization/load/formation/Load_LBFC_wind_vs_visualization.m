@@ -29,7 +29,7 @@ for i = 1:length(wind_com)
     end
 end
 %% save data setting
-save_type = "eps";
+save_type = "epsc";
 save_path = "./result/formation/straight/";
 %% plot style
 titlefont = 20;
@@ -87,7 +87,7 @@ for l = 1:length(wind_dir)
                     while psi_e(kk) < -pi
                         psi_e(kk) = psi_e(kk) + 2*pi;
                     end
-                    while psi_e(i) > pi
+                    while psi_e(kk) > pi
                         psi_e(kk) = psi_e(kk) - 2*pi;
                     end
                 end 

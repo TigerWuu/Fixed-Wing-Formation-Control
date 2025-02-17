@@ -60,7 +60,7 @@ target_time_points = 1:time_interval:Stoptime;
 UAV_locations_points = [1];
 UAV_locations = [1];
 target_index = 1;
-ratio = 50; % 5s
+ratio = 100; % 10s
 
 for i = 1:length(t)
     if t(i) > target_time_points(target_index)

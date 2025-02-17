@@ -11,7 +11,7 @@ for i = 1:length(wind_com)
     eval(['wind_no_windcom_',char(wind_com(i)),'=load("', char(path),'line_45_wind_no_com_',char(wind_com(i)),'_70s.mat")']);
 end
 %% save data setting
-save_type = "eps";
+save_type = "epsc";
 save_path = "./result/formation/straight/";
 
 %% plot style
