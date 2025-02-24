@@ -19,15 +19,18 @@ The referenced fixed-wing UAV model is **Skywalk X8**, while the thesis assumes 
 │       └── init_error_10
 ├── result
 ├── ros
+├   ├── rosbag
+├   ├── px4_msgs
+├   ├── self_msg
 ├── vehicles
 ├── visualization
-│    ├── load
-│    │   ├── formation
-│    │   └── wind
-│    ├── read
-│    ├── ros-px4
-│    └── slprj
-│        └── sim
+│   ├── load
+│   │   ├── formation
+│   │   └── wind
+│   ├── read
+│   ├── ros-px4
+│   └── slprj
+│       └── sim
 ├── Fixed_Wing.slx
 ├── FW_control.slx
 ├── FW_control.slxc
@@ -114,12 +117,13 @@ and Acceleration Observer
     run("Read_straight.m") % need to change this file manually to generate the same bar figure as the thesis, sorry...
     ```
 ### SITL Simulation
-Before generating the SITL figures, please download the _**rosbag**_ file here and put it under the following path
-`./ros/rosbag/{bag_files}`
+Before generating the SITL figures,
 * you have to generate the **px4 message** and the **customized message** for matlab to read the bag files, please refer to the following link:
   * [ros2genmsg](https://www.mathworks.com/help/ros/ref/ros2genmsg.html)
-* The **customized message** is _**self_msgs**_, which is defined in [Formation-PX4](https://github.com/TigerWuu/Formation-PX4)
-  
+* The **customized message** is _**self_msg**_, which is defined in [Formation-PX4](https://github.com/TigerWuu/Formation-PX4)
+>[!NOTE]
+>These figures can only be generated under the **OS** with **ROS2**
+
 1. System Identification
     ```
     %% ros-px4
