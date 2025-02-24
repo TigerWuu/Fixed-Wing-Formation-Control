@@ -76,32 +76,62 @@ sys_theta = tfest(data_theta, np);
 figure('Name','Control inputs');
 
 subplot(3,1,1);
-plot(t_cmd, Vaf_c,t_cmd, Vaf,t_cmd, Vaf_err,'-','linewidth',1.5); hold on;
+plot(t_cmd, Vaf_c,t_cmd, Vaf,'-','linewidth',1.5); hold on;
 % xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
 ylabel('[m/s]','interpreter','latex','fontsize',tickfont);
 % title('Control inputs','interpreter','latex','fontsize',titlefont);
-legend("$V_{aF}^c$","$V_{aF}$","$V_{aF_{e}}$",'interpreter','latex','fontsize',legendfont,'location','best')
+legend("$V_{aF}^c$","$V_{aF}$",'interpreter','latex','fontsize',legendfont,'location','southeast')
 grid on; 
 % grid minor;
 
 subplot(3,1,2);
 % figure('Name','Control inputs psi');
-plot(t_cmd, psif_c,t_cmd, psif,t_cmd, psif_err,'-','linewidth',1.5); hold on;
+plot(t_cmd, psif_c,t_cmd, psif,'-','linewidth',1.5); hold on;
 % xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
 ylabel('[rad]','interpreter','latex','fontsize',tickfont);
 % title('$psi_F^c$','interpreter','latex','fontsize',titlefont);
-legend("$\psi_F^c$","$\psi_F$","$\psi_{F_{e}}$",'interpreter','latex','fontsize',legendfont,'location','best')
+legend("$\psi_F^c$","$\psi_F$",'interpreter','latex','fontsize',legendfont,'location','southeast')
 grid on; 
 % grid minor;
 
 subplot(3,1,3);
 % figure('Name','Control inputs theta');
-plot(t_cmd, thetaf_c,t_cmd, thetaf,t_cmd, thetaf_err,'-','linewidth',1.5); hold on;
+plot(t_cmd, thetaf_c,t_cmd, thetaf,'-','linewidth',1.5); hold on;
 xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
 ylabel('[rad]','interpreter','latex','fontsize',tickfont);
 % title('$\theta_F^c$','interpreter','latex','fontsize',titlefont);
-legend("$\theta_F^c$","$\theta_F$","$\theta_{F_{e}}$",'interpreter','latex','fontsize',legendfont,'location','best')
+legend("$\theta_{F}^c$","$\theta_{F}$",'interpreter','latex','fontsize',legendfont,'location','southeast')
 grid on; 
 % grid minor;
 
+%% plot 
+figure('Name','Control inputs error');
 
+subplot(3,1,1);
+plot(t_cmd, Vaf_err,'-','linewidth',1.5); hold on;
+% xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
+ylabel('[m/s]','interpreter','latex','fontsize',tickfont);
+% title('Control inputs','interpreter','latex','fontsize',titlefont);
+legend("$V_{aF_{e}}$",'interpreter','latex','fontsize',legendfont,'location','best')
+grid on; 
+% grid minor;
+
+subplot(3,1,2);
+% figure('Name','Control inputs psi');
+plot(t_cmd, psif_err,'-','linewidth',1.5); hold on;
+% xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
+ylabel('[rad]','interpreter','latex','fontsize',tickfont);
+% title('$psi_F^c$','interpreter','latex','fontsize',titlefont);
+legend("$\psi_{F_{e}}$",'interpreter','latex','fontsize',legendfont,'location','best')
+grid on; 
+% grid minor;
+
+subplot(3,1,3);
+% figure('Name','Control inputs theta');
+plot(t_cmd, thetaf_err,'-','linewidth',1.5); hold on;
+xlabel('Times[s]','interpreter','latex','fontsize',tickfont);
+ylabel('[rad]','interpreter','latex','fontsize',tickfont);
+% title('$\theta_F^c$','interpreter','latex','fontsize',titlefont);
+legend("$\theta_{F_{e}}$",'interpreter','latex','fontsize',legendfont,'location','best')
+grid on; 
+% grid minor;

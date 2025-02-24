@@ -11,7 +11,8 @@ addpath('./visualization');
 %% ros-px4
 addpath('./visualization/ros-px4');
 % run("ROS_Formation_data_visualization.m")
-run("PX4_fw_system_ID.m")
+run("ROS_Formation_multi_data_visualization.m")
+% run("PX4_fw_system_ID.m")
 
 %% load wind
 addpath('./visualization/load/wind');
@@ -21,7 +22,7 @@ addpath('./visualization/load/wind');
 %% Load formation
 addpath('./visualization/load/formation');
 % run("Load_LBFC_vs_visualization.m") % original vs modified
-run("Load_LBFC_windno_vs_visualization.m") % different wind cases : no wind 
+% run("Load_LBFC_windno_vs_visualization.m") % different wind cases : no wind 
 % run("Load_LBFC_circle_windno_vs_visualization.m") % different wind cases : no wind 
 % run("Load_LBFC_wind_vs_visualization.m") % different wind cases
 

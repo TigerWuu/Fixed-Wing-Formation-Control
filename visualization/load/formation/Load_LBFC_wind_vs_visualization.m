@@ -29,7 +29,7 @@ for i = 1:length(wind_com)
     end
 end
 %% save data setting
-save_type = "eps";
+save_type = "epsc";
 save_path = "./result/formation/straight/";
 %% plot style
 titlefont = 20;
