@@ -21,9 +21,6 @@ bagPath = './ros/rosbag/250223_wind_path-C_r-400_com-off'; % IROS
 % bagPath = './ros/rosbag/250223_wind_path-L_dir-45_com-off'; % IROS
 % bagPath = './ros/rosbag/250223_wind_path-L_dir-45_com-on'; % IROS
 
-% bagPath = './ros/rosbag/ 1203_nowind_path-C_r-800_com-off';
-% bagPath = './ros/rosbag/ 1204_wind_path-C_r-800_com-off';
-% bagPath = './ros/rosbag/ 1204_wind_path-C_r-800_com-on';
 % bagPath = './ros/rosbag/0910_ICRA/0910_a2_windned500-5gust1p20d90_pathLdir0_L1_com_on';
 
 % Create a rosbag reader object

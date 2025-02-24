@@ -10,8 +10,6 @@ close all;
 bagPath = './ros/rosbag/1026_02_25-45-5_fixed_wing_id';
 % bagPath = './ros/rosbag/1026_025_fixed_wing_id';
 
-% bagPath = './ros/rosbag/0930_Va10_windned050-5gust1p20d90_f0_pathLdir0_L1_com_off';
-
 cmdtopic = '/command_information';
 
 % Create a rosbag reader object
