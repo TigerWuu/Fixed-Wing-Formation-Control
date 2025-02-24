@@ -20,7 +20,7 @@ env.g = 9.81; % [m/s^2]
 % air density
 env.rho = 1.2682; % [kg/m^3]
 % wind (ned)
-env.w.s = 8; % [m/s]
+env.w.s = 2; % [m/s]
 env.w.dir = 3*pi/4; % [rad]
 
 %% Leader paramters
@@ -51,11 +51,11 @@ L = 1;
 L2 = 0.1;
 
 % px4 gain
-% c1 = 0.1;
-% c2 = 0.1;
+% c1 = 1.0;
+% c2 = 1.0;
 % c3 = 1.0;
-% c4 = 0.2;
-% c5 = 0.2;
+% c4 = 0.3;
+% c5 = 0.3;
 % c6 = 3.0;
 
 c1 = 0.2;
@@ -91,4 +91,4 @@ ts = 1;
 com = 0;
 
 %% Sim time
-SimTime = 70;
+SimTime = 100;

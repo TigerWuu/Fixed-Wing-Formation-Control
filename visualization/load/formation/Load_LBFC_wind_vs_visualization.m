@@ -87,7 +87,7 @@ for l = 1:length(wind_dir)
                     while psi_e(kk) < -pi
                         psi_e(kk) = psi_e(kk) + 2*pi;
                     end
-                    while psi_e(i) > pi
+                    while psi_e(kk) > pi
                         psi_e(kk) = psi_e(kk) - 2*pi;
                     end
                 end 

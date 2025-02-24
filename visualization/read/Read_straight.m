@@ -5,14 +5,14 @@ clc;
 
 
 %% load data
-data = readmatrix("./csv/wind_straight_name_mod.xlsx");
+data = readmatrix("./csv/wind_straight_name.xlsx");
 case_title = load("./csv/straight_case_name.mat");
 data = data(:,2:17);
 RMSE = data(2,:);
 IAE = data(1,:);
 
 %% save data setting
-save_type = "eps";
+save_type = "epsc";
 save_path = "./result/formation/straight/analysis/";
 
 %% plot style

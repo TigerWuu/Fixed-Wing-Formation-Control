@@ -25,6 +25,8 @@ addpath('./visualization/load/formation');
 % run("Load_LBFC_windno_vs_visualization.m") % different wind cases : no wind 
 % run("Load_LBFC_circle_windno_vs_visualization.m") % different wind cases : no wind 
 % run("Load_LBFC_wind_vs_visualization.m") % different wind cases
+run("Load_LBFC_circle_wind_vs_visualization.m") % different wind cases
+
 
 %% Read data from csv
 addpath('./visualization/read');
