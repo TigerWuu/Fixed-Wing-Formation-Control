@@ -8,13 +8,13 @@
 
     >  **.slx file lists** :
     > 
-    > FW_control.slx 
+    > FW_control.slx : only fixed-wing UAV model.
     >  
-    > FW_formation_control.slx 
+    > FW_formation_control.slx : fixed-wing UAV with formation control algorithm.
     >
-    > FW_formation_control_wind.slx 
+    > FW_formation_control_wind.slx : fixed-wing UAV with formation control and wind estimation algorithm.
     >
-    > Multi_FW_formation_control_wind.slx 
+    > Multi_FW_formation_control_wind.slx : Three fixed-wing UAVs with formation control and wind estimation algorithm.
     >
 
 ## Data Visualization
