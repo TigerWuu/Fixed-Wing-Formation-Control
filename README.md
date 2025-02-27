@@ -3,7 +3,8 @@ The model-in-the-loop (MIL) simulation package for formation control, wind estim
 ## Follower System Block Diagram
 The referenced fixed-wing UAV model is **Skywalk X8**, while the thesis assumes all the dynamics as a first-order system. The UAV dynamics can be toggled in _**Fixed Wing Model**_.
 * **FW_formation_control_wind.slx**
-![image](https://github.com/user-attachments/assets/9396d8f7-1155-4221-bef5-27362f36dfcb)
+![image](https://github.com/user-attachments/assets/96bc8d8d-0eca-4ff5-9078-e1393249669d)
+
 
 ## Code Structure
 
