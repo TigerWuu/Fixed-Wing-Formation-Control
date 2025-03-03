@@ -123,7 +123,7 @@ Before generating the SITL figures,
   * [ros2genmsg](https://www.mathworks.com/help/ros/ref/ros2genmsg.html)
 * The **customized message** is _**self_msg**_, which is defined in [Formation-PX4](https://github.com/TigerWuu/Formation-PX4)
 >[!NOTE]
->These figures can only be generated under the **OS** with **ROS2**
+>These figures can only be generated under the **OS** installed with **ROS2**
 
 1. System Identification
     ```
