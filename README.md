@@ -1,5 +1,16 @@
 # Fixed-Wing Formation Control
 The model-in-the-loop (MIL) simulation package for formation control, wind estimation, and compensation. 
+
+## Contents
+
+* [Follower System Block Diagram](#follower-system-block-diagram)
+* [Code Structure](#code-structure)
+* [Quick Start](#quick-start)
+* [Data Visualization](#data-visualization)
+    * [SMWO Performance Evaluation](#smwo-performance-evaluation)
+    * [LBFC-SMWO Performance Evaluation](#lbfc-smwo-performance-evaluation)
+    * [SITL Simulation](#sitl-simulation)
+
 ## Follower System Block Diagram
 The referenced fixed-wing UAV model is **Skywalk X8**, while the thesis assumes all the dynamics as a first-order system. The UAV dynamics can be toggled in _**Fixed Wing Model**_.
 * **FW_formation_control_wind.slx**
