@@ -32,7 +32,6 @@ The referenced fixed-wing UAV model is **Skywalk X8**, while the thesis assumes 
 │       ├── init_error_0
 │       ├── init_error_-10
 │       └── init_error_10
-├── result
 ├── ros
 ├   ├── rosbag
 ├   ├── px4_msgs
@@ -48,18 +47,13 @@ The referenced fixed-wing UAV model is **Skywalk X8**, while the thesis assumes 
 │       └── sim
 ├── Fixed_Wing.slx
 ├── FW_control.slx
-├── FW_control.slxc
 ├── FW_formation_control.slx
-├── FW_formation_control.slxc
 ├── FW_formation_control_wind.slx
-├── FW_formation_control_wind.slxc
 ├── main.m
 ├── Multi_FW_formation_control_wind.slx
-├── Multi_FW_formation_control_wind.slxc
 ├── run_visualization.m
 ├── slblocks.m
-├── test.slx
-└── test.slxc
+└── test.slx
 
 
 ```
