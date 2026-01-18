@@ -1,3 +1,4 @@
 ros/matlab_msg_gen/*
 **/slprj
 result/*
+*.slxc
