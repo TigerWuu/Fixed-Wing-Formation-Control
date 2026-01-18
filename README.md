@@ -1,9 +1,24 @@
-# Fixed-wing formation control
+# Fixed-Wing Formation Control
 The model-in-the-loop (MIL) simulation package for formation control, wind estimation, and compensation. 
+
+## News
+* [2025.05.30] **_Lyapunov-Based Formation Controller Design for Fixed-Wing UAVs under Variant Wind Fields_** is accepted by [AIM 2025](https://ieeexplore.ieee.org/document/11175636).
+
+## Contents
+
+* [Follower System Block Diagram](#follower-system-block-diagram)
+* [Code Structure](#code-structure)
+* [Quick Start](#quick-start)
+* [Data Visualization](#data-visualization)
+    * [SMWO Performance Evaluation](#smwo-performance-evaluation)
+    * [LBFC-SMWO Performance Evaluation](#lbfc-smwo-performance-evaluation)
+    * [SITL Simulation](#sitl-simulation)
+
 ## Follower System Block Diagram
 The referenced fixed-wing UAV model is **Skywalk X8**, while the thesis assumes all the dynamics as a first-order system. The UAV dynamics can be toggled in _**Fixed Wing Model**_.
 * **FW_formation_control_wind.slx**
-![image](https://github.com/user-attachments/assets/9396d8f7-1155-4221-bef5-27362f36dfcb)
+![image](https://github.com/user-attachments/assets/96bc8d8d-0eca-4ff5-9078-e1393249669d)
+
 
 ## Code Structure
 
@@ -122,7 +137,7 @@ Before generating the SITL figures,
   * [ros2genmsg](https://www.mathworks.com/help/ros/ref/ros2genmsg.html)
 * The **customized message** is _**self_msg**_, which is defined in [Formation-PX4](https://github.com/TigerWuu/Formation-PX4)
 >[!NOTE]
->These figures can only be generated under the **OS** with **ROS2**
+>These figures can only be generated under the **OS** installed with **ROS2**
 
 1. System Identification
     ```
