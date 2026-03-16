@@ -3,6 +3,7 @@ The model-in-the-loop (MIL) simulation package for formation control, wind estim
 
 ## News
 * [2025.05.30] **_Lyapunov-Based Formation Controller Design for Fixed-Wing UAVs under Variant Wind Fields_** is accepted by [AIM 2025](https://ieeexplore.ieee.org/document/11175636).
+* The software-in-the-loop (SITL) simulation implemented in the open-source PX4 Autopilot can be found in [Formation-PX4](https://github.com/TigerWuu/Formation-PX4)  
 
 ## Contents
 
